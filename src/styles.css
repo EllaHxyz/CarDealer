@@ -1,0 +1,46 @@
+/* You can add global styles to this file, and also import other style files */
+
+body {
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.page {
+    margin: 1% 10% 1% 10%;
+    font-size: 16px;
+}
+
+.keywords-input {
+    width: 80%;
+}
+
+.search-button {
+    width: 15%;
+}
+
+.example-container {
+    height: 400px;
+    overflow: auto;
+}
+
+table {
+    width: 100%;
+}
+
+.title-with-border {
+    font-weight: 500;
+    font-size: 20px;
+    margin-bottom: 5px;
+}
+
+.title-with-border2 {
+    font-weight: 500;
+    font-size: 20px;
+    margin-bottom: 15px;
+}
+
+.input-div-1 {
+    width: 200px;
+    font-weight: 500;
+    color: #676767;
+}

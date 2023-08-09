@@ -1,0 +1,146 @@
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
+import { MatSnackBar } from '@angular/material/snack-bar';
+
+
+@Component({
+  selector: 'app-reports',
+  templateUrl: './reports.component.html',
+  styleUrls: ['./reports.component.css']
+})
+export class ReportsComponent implements OnInit {
+
+
+  /*boolean for different tables*/
+  colortableisShown = false;
+  belowcosttableisShown = false;
+  timeininventorytableisShown = false;
+  partstatstableisShown = false;
+ 
+  /*results holders for different reports*/
+  reportSalesbyColor: any;
+  reportBelowCostSales: any;
+  reporttimeininventory: any;
+  reportpartsStats: any;
+
+  /*displayed columns for different reports*/
+  displayedColumns = ['VehicleColor', 'NumberOfCarsSold'];
+  displayedColumnsbelowcostsales = ['SoldDate', 'InvoicePrice', 'SoldPrice', 'SoldInvoicePercentage', 'CustomerName', 'SalespersonName'];
+  displayedColumntimeininventory = ['VehicleType', 'AverageDaysinInventory'];
+  displayedColumnpartsStats = ['VendorName', 'totalcost', 'totalquantity'];
+
+  dateRange = ['Past 30 days', 'Past 1 year', 'Over all time'];
+  days = '';
+  searchRequest = {
+    dateRange: "All"
+  };
+
+  constructor(private _Activatedroute: ActivatedRoute,
+    private http: HttpClient,
+    private _snackBar: MatSnackBar) { }
+
+  ngOnInit(): void {
+    if (this.searchRequest.dateRange = 'Past 30 days') {
+      this.days = '30';
+    } else if (this.searchRequest.dateRange = 'Past 30 days') {
+      this.days = '360';
+    } else {
+      this.days = '370';
+    };
+  };
+
+  SalebyColor() {
+    this.http.get<any>('https://localhost:5001/Report/ReportSalesByColor?Days=' + this.days).subscribe(data => {
+      if (data == []) {
+        let snackBarRef = this._snackBar.open('Sorry, it looks like we don’t have any color registered!', 'Close', { duration: 3000 });
+        this.colortableisShown = false;
+      } else {
+        this.colortableisShown = true;
+        data.sort((a: { VehicleColor: string }, b: { VehicleColor: string }) => a.VehicleColor.localeCompare(b.VehicleColor));
+        this.reportSalesbyColor = data;
+        console.log(data);
+      };
+    })
+  };
+  SalebyColorReset() {
+    this.colortableisShown = false;
+    this.reportSalesbyColor = [];
+  };
+
+
+  SalebyManufacturer() {
+
+  };
+  SalebyManufacturerReset() {
+
+  };
+
+
+  SalebyType() {
+
+  };
+  SalebyTypeReset() {
+
+  };
+
+
+
+
+  BelowCostSales() {
+    this.http.get<any>('https://localhost:5001/Report/ReportBelowCostSales').subscribe(data => {
+      if (data == []) {
+        let snackBarRef = this._snackBar.open('Sorry, it looks like we don’t have any sales record registered!', 'Close', { duration: 3000 });
+        this.belowcosttableisShown = false;
+      } else {
+        this.belowcosttableisShown = true;
+        this.reportBelowCostSales = data;
+        console.log(data);
+      };
+    })
+  };
+  BelowCostSalesReset() {
+    this.belowcosttableisShown = false;
+    this.reportBelowCostSales = [];
+  };
+
+
+  AveTimeinInventory() {
+    this.http.get<any>('https://localhost:5001/Report/ReportAverageTime').subscribe(data => {
+      if (data == []) {
+        let snackBarRef = this._snackBar.open('Sorry, it looks like we don’t have any vehicel sold!', 'Close', { duration: 3000 });
+        this.timeininventorytableisShown = false;
+      } else {
+        this.timeininventorytableisShown = true;
+        this.reporttimeininventory = data;
+        console.log(data);
+      };
+    })
+  };
+  AveTimeinInventoryReset() {
+    this.timeininventorytableisShown = false;
+    this.reporttimeininventory = [];
+  };
+
+
+  PartsStats() {
+    this.http.get<any>('https://localhost:5001/Report/ReportPartsStatistics').subscribe(data => {
+      if (data = []) {
+        let snackBarRef = this._snackBar.open('Sorry, it looks like we don’t have any part ised!', 'Close', { duration: 3000 });
+        this.partstatstableisShown = false;
+      } else {
+        this.partstatstableisShown = true;
+        this.reportpartsStats = data;
+        console.log(data);
+      };
+    })
+  };
+  PartsStatsReset() {
+    this.partstatstableisShown = false;
+    this.reportpartsStats = [];
+  };
+
+
+
+
+}

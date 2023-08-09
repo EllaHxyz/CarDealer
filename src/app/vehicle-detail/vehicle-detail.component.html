@@ -1,0 +1,223 @@
+<div class='page' *ngIf="vehicleData">
+    <mat-card>
+        <mat-card-title>Vehicle Detail:</mat-card-title>
+        <mat-card-content>
+            <div fxLayout="row" fxLayoutAlign="space-between center">
+                <div class="input-div-1">VIN:</div>
+                <mat-form-field style="margin-left: 10%;">
+                    <input matInput [(ngModel)]="vehicleData.vin" readonly="true">
+                </mat-form-field>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="space-between center">
+                <div class="input-div-1">Model Name:</div>
+                <mat-form-field style="margin-left: 10%;">
+                    <input matInput [(ngModel)]="vehicleData.modelName" readonly="true">
+                </mat-form-field>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="space-between center">
+                <div class="input-div-1">Vehicle Type:</div>
+                <mat-form-field style="margin-left: 10%;">
+                    <input matInput [(ngModel)]="vehicleData.vehicleType" readonly="true">
+                </mat-form-field>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="space-between center" *ngIf="vehicleData.vehicleType=='Car'">
+                <div class="input-div-2">Number of doors:</div>
+                <mat-form-field style="margin-left: 10%;">
+                    <input matInput [(ngModel)]="vehicleData.doorCount" readonly="true">
+                </mat-form-field>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="space-between center" *ngIf="vehicleData.vehicleType=='Convertible'">
+                <div class="input-div-2">Roof Type:</div>
+                <mat-form-field style="margin-left: 10%;">
+                    <input matInput [(ngModel)]="vehicleData.roofType" readonly="true">
+                </mat-form-field>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="space-between center" *ngIf="vehicleData.vehicleType=='Convertible'">
+                <div class="input-div-2">Back Seat Count:</div>
+                <mat-form-field style="margin-left: 10%;">
+                    <input matInput [(ngModel)]="vehicleData.backSeatCount" readonly="true">
+                </mat-form-field>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="space-between center" *ngIf="vehicleData.vehicleType=='Truck'">
+                <div class="input-div-2">Cargo capacity (in tons):</div>
+                <mat-form-field style="margin-left: 10%;">
+                    <input matInput [(ngModel)]="vehicleData.cargoCapacity" readonly="true">
+                </mat-form-field>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="space-between center" *ngIf="vehicleData.vehicleType=='Truck'">
+                <div class="input-div-2">Cargo cover type (optional):</div>
+                <mat-form-field style="margin-left: 10%;">
+                    <input matInput [(ngModel)]="vehicleData.cargoCoverType" readonly="true">
+                </mat-form-field>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="space-between center" *ngIf="vehicleData.vehicleType=='Truck'">
+                <div class="input-div-2">Number of rear axles:</div>
+                <mat-form-field style="margin-left: 10%;">
+                    <input matInput [(ngModel)]="vehicleData.rearAxles" readonly="true">
+                </mat-form-field>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="space-between center" *ngIf="vehicleData.vehicleType=='Van'">
+                <div class="input-div-2">Has Driver’s Side Back Door</div>
+                <mat-form-field style="margin-left: 10%;">
+                    <input matInput [(ngModel)]="vehicleData.hasBackdoor" readonly="true">
+                </mat-form-field>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="space-between center" *ngIf="vehicleData.vehicleType=='SUV'">
+                <div class="input-div-2">Drivetraintype:</div>
+                <mat-form-field style="margin-left: 10%;">
+                    <input matInput [(ngModel)]="vehicleData.drivetrainType" readonly="true">
+                </mat-form-field>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="space-between center" *ngIf="vehicleData.vehicleType=='SUV'">
+                <div class="input-div-2">Number of cupholders:</div>
+                <mat-form-field style="margin-left: 10%;">
+                    <input matInput [(ngModel)]="vehicleData.cupholderCount" readonly="true">
+                </mat-form-field>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="space-between center">
+                <div class="input-div-1">Manufacture:</div>
+                <mat-form-field style="margin-left: 10%;">
+                    <input matInput [(ngModel)]="vehicleData.manufacturerName" readonly="true">
+                </mat-form-field>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="space-between center">
+                <div class="input-div-1">Model year:</div>
+                <mat-form-field style="margin-left: 10%;">
+                    <input matInput [(ngModel)]="vehicleData.modelYear" readonly="true">
+                </mat-form-field>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="space-between center">
+                <div class="input-div-1">Color:</div>
+                <mat-form-field style="margin-left: 10%;">
+                    <input matInput [(ngModel)]="vehicleData.color" readonly="true">
+                </mat-form-field>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="space-between center">
+                <h2>Description:</h2>
+                {{vehicleData.description}}
+            </div>
+            <div *ngIf="roleType=='owner'||roleType=='manager'" fxLayout="row" fxLayoutAlign="space-between center">
+                <div class="input-div-1">inventoryClerk Name:</div>
+                <mat-form-field style="margin-left: 10%;">
+                    <input matInput [(ngModel)]="vehicleData.username" readonly="true">
+                </mat-form-field>
+            </div>
+            <div *ngIf="roleType=='inventory_clerk'||roleType=='owner'||roleType=='manager'" fxLayout="row" fxLayoutAlign="space-between center">
+                <div class="input-div-1">Invoice Price:</div>
+                <mat-form-field style="margin-left: 10%;">
+                    <input matInput [(ngModel)]="vehicleData.invoicePrice" readonly="true">
+                </mat-form-field>
+            </div>
+            <div *ngIf="roleType=='owner'||roleType=='manager'" fxLayout="row" fxLayoutAlign="space-between center">
+                <div class="input-div-1">In-Stock Date:</div>
+                <mat-form-field style="margin-left: 10%;">
+                    <input matInput [(ngModel)]="vehicleData.inStockDate" readonly="true">
+                </mat-form-field>
+            </div>
+            <div *ngIf="(roleType=='owner'||roleType=='manager') && saleData!=null">
+                <h2>Sales Information:</h2>
+                <div fxLayout="row" fxLayoutAlign="space-between center">
+                    <div class="input-div-1">CustomerType:</div>
+                    <mat-form-field style="margin-left: 10%;">
+                        <input matInput [(ngModel)]="saleData.CustomerType" readonly="true">
+                    </mat-form-field>
+                </div>
+                <div fxLayout="row" fxLayoutAlign="space-between center">
+                    <div class="input-div-2">CustomerName:</div>
+                    <mat-form-field style="margin-left: 10%;">
+                        <input matInput [(ngModel)]="saleData.CustomerName" readonly="true">
+                    </mat-form-field>
+                </div>
+                <div fxLayout="row" fxLayoutAlign="space-between center">
+                    <div class="input-div-2">CustomerAddress:</div>
+                    <mat-form-field style="margin-left: 10%;width: auto;">
+                        <input matInput [(ngModel)]="saleData.CustomerAddress" readonly="true">
+                    </mat-form-field>
+                </div>
+                <div fxLayout="row" fxLayoutAlign="space-between center" *ngIf="saleData.CustomerEmail">
+                    <div class="input-div-2">CustomerEmail:</div>
+                    <mat-form-field style="margin-left: 10%;width: auto;">
+                        <input matInput [(ngModel)]="saleData.CustomerEmail" readonly="true">
+                    </mat-form-field>
+                </div>
+                <div fxLayout="row" fxLayoutAlign="space-between center">
+                    <div class="input-div-2">CustomerPhoneNumber:</div>
+                    <mat-form-field style="margin-left: 10%;width: auto;">
+                        <input matInput [(ngModel)]="saleData.CustomerPhoneNumber" readonly="true">
+                    </mat-form-field>
+                </div>
+                <div fxLayout="row" fxLayoutAlign="space-between center">
+                    <div class="input-div-1">List Price:</div>
+                    <mat-form-field style="margin-left: 10%;">
+                        <input matInput [(ngModel)]="vehicleData.listPrice" readonly="true">
+                    </mat-form-field>
+                </div>
+                <div fxLayout="row" fxLayoutAlign="space-between center">
+                    <div class="input-div-1">Sold Price:</div>
+                    <mat-form-field style="margin-left: 10%;">
+                        <input matInput [(ngModel)]="saleData.SoldPrice" readonly="true">
+                    </mat-form-field>
+                </div>
+                <div fxLayout="row" fxLayoutAlign="space-between center">
+                    <div class="input-div-1">SoldDate:</div>
+                    <mat-form-field style="margin-left: 10%;">
+                        <input matInput [(ngModel)]="saleData.SoldDate" readonly="true">
+                    </mat-form-field>
+                </div>
+                <div fxLayout="row" fxLayoutAlign="space-between center">
+                    <div class="input-div-1">SalespersonName:</div>
+                    <mat-form-field style="margin-left: 10%;">
+                        <input matInput [(ngModel)]="saleData.SalespersonName" readonly="true">
+                    </mat-form-field>
+                </div>
+            </div>
+            <mat-card-actions *ngIf="(roleType=='sales_person'||roleType=='owner') && !saleData">
+                <button mat-raised-button color="primary" (click)="sellVehicle()">Sell Vehicle</button>
+            </mat-card-actions>
+        </mat-card-content>
+    </mat-card>
+    <mat-card *ngIf="(roleType=='owner'||roleType=='manager')&& repairData.length > 0 ">
+        <mat-card-title>Repairs</mat-card-title>
+        <mat-card-content>
+            <div class="example-container mat-elevation-z8">
+                <table mat-table [dataSource]="repairData">
+                    <!-- Position Column -->
+                    <ng-container matColumnDef="Name">
+                        <th mat-header-cell *matHeaderCellDef> Name </th>
+                        <td mat-cell *matCellDef="let element"> {{element.Name}} </td>
+                    </ng-container>
+                    <!-- Name Column -->
+                    <ng-container matColumnDef="ServiceWritter">
+                        <th mat-header-cell *matHeaderCellDef> ServiceWritter </th>
+                        <td mat-cell *matCellDef="let element"> {{element.ServiceWriter}} </td>
+                    </ng-container>
+                    <!-- Name Column -->
+                    <ng-container matColumnDef="StartDate">
+                        <th mat-header-cell *matHeaderCellDef> StartDate </th>
+                        <td mat-cell *matCellDef="let element"> {{element['Start Date']}} </td>
+                    </ng-container>
+                    <!-- Weight Column -->
+                    <ng-container matColumnDef="EndDate">
+                        <th mat-header-cell *matHeaderCellDef> EndDate </th>
+                        <td mat-cell *matCellDef="let element"> {{element['End Date']}} </td>
+                    </ng-container>
+                    <!-- Symbol Column -->
+                    <ng-container matColumnDef="Larborchages">
+                        <th mat-header-cell *matHeaderCellDef> Larborchages </th>
+                        <td mat-cell *matCellDef="let element"> {{element.LaborCharge}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="partscost">
+                        <th mat-header-cell *matHeaderCellDef> partscost </th>
+                        <td mat-cell *matCellDef="let element"> {{element.PartsCost}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="totalcost">
+                        <th mat-header-cell *matHeaderCellDef> totalcost </th>
+                        <td mat-cell *matCellDef="let element"> {{element.TotalCost}} </td>
+                    </ng-container>
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                </table>
+            </div>
+        </mat-card-content>
+    </mat-card>
+</div>

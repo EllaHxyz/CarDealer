@@ -1,0 +1,141 @@
+<div class="page">
+    <div fxLayout="row" fxLayoutAlign="space-between start">
+        <h1>{{ title }}</h1>
+        <button mat-raised-button color="primary" (click)="Login()">
+      {{ loginString }}
+    </button>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="start center">
+        <div style="font-weight: 500">Total Vehicles Number:</div>
+        <mat-form-field style="margin-left: 10%">
+            <input matInput [(ngModel)]="totalUnsold" readonly="true" />
+        </mat-form-field>
+    </div>
+    <div class="title-with-border">Searching</div>
+    <div fxLayout="row" fxLayoutAlign="space-between center">
+        <mat-form-field class="keywords-input">
+            <mat-label>Keywords</mat-label>
+            <input matInput placeholder="Input Keywords (eg:manufacturer, model year, model name and description)" [(ngModel)]="searchRequest.keywords" />
+            <button mat-button *ngIf="searchRequest.keywords" matSuffix mat-icon-button aria-label="Clear" (click)="searchRequest.keywords = ''">
+        <mat-icon>close</mat-icon>
+      </button>
+        </mat-form-field>
+        <button mat-raised-button color="primary" class="search-button" (click)="Search()">
+      Search
+    </button>
+    </div>
+    <mat-form-field appearance="outline">
+        <mat-label>Vehicle Type</mat-label>
+        <mat-select [(value)]="searchRequest.vehicleType">
+            <mat-option *ngFor="let type of vehicleType" [value]="type">{{ type }}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+        <mat-label>Manufacture</mat-label>
+        <mat-select [(value)]="searchRequest.manufacturer">
+            <mat-option *ngFor="let m of ManufactureList" [value]="m.ManufacturerName">{{ m.ManufacturerName }}</mat-option>
+        </mat-select>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+        <mat-label>ModelYear</mat-label>
+        <mat-select [(value)]="searchRequest.modelYear">
+            <mat-option *ngFor="let m of ModelYearList" [value]="m">{{ m }}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+        <mat-label>Color</mat-label>
+        <mat-select [(value)]="searchRequest.color">
+            <mat-option *ngFor="let c of ColorList" [value]="c.Color">{{ c.Color }}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+    <mat-form-field appearance="outline" *ngIf="roleType == 'manager' || roleType == 'owner'">
+        <mat-label>IsSold</mat-label>
+        <mat-select [(value)]="searchRequest.isSold">
+            <mat-option *ngFor="let c of ['All', 'True', 'False']" [value]="c">{{ c }}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+    <div fxLayout="row" fxLayoutAlign="start center">
+        <div style="margin: 0 5% 0 0">List Price:</div>
+        <mat-form-field class="">
+            <mat-label>priceLower</mat-label>
+            <input matInput placeholder="From" [(ngModel)]="searchRequest.pricelower" (keypress)="keyPressNumbers($event)" />
+        </mat-form-field>
+        <div style="margin: 0 5% 0 2.5%">to</div>
+        <mat-form-field class="">
+            <mat-label>PriceUpper</mat-label>
+            <input matInput placeholder="To" [(ngModel)]="searchRequest.priceUpper" (keypress)="keyPressNumbers($event)" />
+        </mat-form-field>
+    </div>
+    <div *ngIf="vehicleVinSearch">
+        <div fxLayout="row" fxLayoutAlign="space-between center">
+            <mat-form-field class="keywords-input">
+                <mat-label>Search By VIN</mat-label>
+                <input matInput placeholder="Input VIN" [(ngModel)]="searchRequest.VIN" />
+            </mat-form-field>
+            <button mat-raised-button color="primary" class="search-button" (click)="SearchbyVIN()">
+        Search by VIN
+      </button>
+        </div>
+    </div>
+    <div>
+        <div fxLayout="row" fxLayoutAlign="start center">
+            <button *ngIf="roleType == 'inventory_clerk' || roleType == 'owner'" mat-raised-button color="primary" class="addtional-button" (click)="AddVehicle()">Add Vehicle</button>
+            <button *ngIf="roleType == 'owner'||roleType == 'service_writer'" mat-raised-button color="primary" class="addtional-button" (click)="AddRepair()">Add Repair</button>
+            <button *ngIf="roleType == 'manager' || roleType == 'owner'" mat-raised-button color="primary" class="addtional-button" (click)="Viewreports()">View Reports</button>
+        </div>
+    </div>
+    <div *ngIf="tableisShown">
+        <div class="title-with-border2" style="margin-top: 2.5%">
+            Searching Results:
+        </div>
+        <div class="example-container mat-elevation-z8">
+            <table mat-table [dataSource]="dataSource">
+                <!-- Position Column -->
+                <ng-container matColumnDef="vin">
+                    <th mat-header-cell *matHeaderCellDef>VIN</th>
+                    <td mat-cell *matCellDef="let element">{{ element.vin }}</td>
+                </ng-container>
+                <!-- Name Column -->
+                <ng-container matColumnDef="vehicleType">
+                    <th mat-header-cell *matHeaderCellDef>vehicleType</th>
+                    <td mat-cell *matCellDef="let element">{{ element.vehicleType }}</td>
+                </ng-container>
+                <!-- Name Column -->
+                <ng-container matColumnDef="modelYear">
+                    <th mat-header-cell *matHeaderCellDef>ModelYear</th>
+                    <td mat-cell *matCellDef="let element">{{ element.modelYear }}</td>
+                </ng-container>
+                <!-- Weight Column -->
+                <ng-container matColumnDef="manufacturerName">
+                    <th mat-header-cell *matHeaderCellDef>Manufacturer</th>
+                    <td mat-cell *matCellDef="let element">
+                        {{ element.manufacturerName }}
+                    </td>
+                </ng-container>
+                <!-- Symbol Column -->
+                <ng-container matColumnDef="modelName">
+                    <th mat-header-cell *matHeaderCellDef>ModelName</th>
+                    <td mat-cell *matCellDef="let element">{{ element.modelName }}</td>
+                </ng-container>
+                <ng-container matColumnDef="color">
+                    <th mat-header-cell *matHeaderCellDef>Color(s)</th>
+                    <td mat-cell *matCellDef="let element">{{ element.color }}</td>
+                </ng-container>
+                <ng-container matColumnDef="listPrice">
+                    <th mat-header-cell *matHeaderCellDef>listPrice</th>
+                    <td mat-cell *matCellDef="let element">{{ element.listPrice }}</td>
+                </ng-container>
+                <ng-container matColumnDef="descriptionMatch">
+                    <th mat-header-cell *matHeaderCellDef>DescriptionMatch</th>
+                    <td mat-cell *matCellDef="let element">{{ element.descriptionMatch==0?'X':'' }}</td>
+                </ng-container>
+                <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns" (dblclick)="getRecord(row)"></tr>
+            </table>
+        </div>
+    </div>
+</div>

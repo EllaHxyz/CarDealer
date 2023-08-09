@@ -1,0 +1,23 @@
+.page {
+    /* text-align: center; */
+    width: 1000px;
+    padding: 2% auto;
+}
+
+.input-div-1 {
+    width: 200px;
+    font-weight: 500;
+    color: #676767;
+}
+
+.input-div {
+    width: auto;
+}
+
+.example-margin {
+    margin: 0 2% 2% 0;
+}
+
+.example-full-width {
+    height: 200px;
+}

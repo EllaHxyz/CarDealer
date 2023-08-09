@@ -1,0 +1,68 @@
+<div class='page'>
+    <div>
+      <div fxLayout="row" fxLayoutAlign="space-between center">
+            <h1></h1>
+        </div>
+    </div>
+    
+    
+    <div>
+    <button mat-raised-button color="primary" class="search-button" (click)="GetCustomer()">Generate Reports</button>
+    </div>
+
+
+    <div *ngIf="tableisShown">
+      <div class="example-container mat-elevation-z8">
+      <div class = "title-with-boarder2" style = "margin-top:2.5%"></div>
+      <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+    
+        
+      
+        <!-- SoldDate Column -->
+        <ng-container matColumnDef="Name">
+            <th mat-header-cell *matHeaderCellDef> Name </th>
+            <td mat-cell *matCellDef="let element"> {{element.Name}} </td>
+          </ng-container>
+
+          <!-- Name Column -->
+          <ng-container matColumnDef="FirstSaleorRepairStartDate">
+            <th mat-header-cell *matHeaderCellDef> First Sale or Repair Date</th>
+            <td mat-cell *matCellDef="let element"> {{element.FirstSaleorRepairStartDate| date:'YYYY-MM-dd '}} </td>
+          </ng-container>
+        
+
+          <ng-container matColumnDef="MostRecentSaleorRepairStartDate">
+            <th mat-header-cell *matHeaderCellDef> Most Recent Sale or Repair Date </th>
+            <td mat-cell *matCellDef="let element"> {{element.MostRecentSaleorRepairStartDate | date:'YYYY-MM-dd '}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="NumberofSales">
+            <th mat-header-cell *matHeaderCellDef> Number of Sales </th>
+            <td mat-cell *matCellDef="let element"> {{element.NumberofSales }} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="NumberofRepairs">
+            <th mat-header-cell *matHeaderCellDef>Number of Repairs </th>
+            <td mat-cell *matCellDef="let element"> {{element.NumberofRepairs}} </td>
+          </ng-container>
+
+
+          <ng-container matColumnDef="GrossIncome">
+            <th mat-header-cell *matHeaderCellDef>Gross Income </th>
+            <td mat-cell *matCellDef="let element"> {{element.GrossIncome}} </td>
+          </ng-container>
+
+          <!-- Get Details -->
+          <ng-container matColumnDef="getdetails">
+            <th mat-header-cell *matHeaderCellDef> Details </th>
+            <td mat-cell *matCellDef="let element"> <button mat-raised-button color="primary" (click)="getRecord(element)">Get Details</button> </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;" ></tr>
+        </table>
+        </div>
+    
+    </div>
+    
+    

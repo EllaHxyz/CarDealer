@@ -1,0 +1,43 @@
+<div class='page' *ngIf="customerdata">
+    <mat-card>
+        <mat-card-title *ngIf="customerdata.Customertype=='Individual'">Individual Customer Detail:</mat-card-title>
+        <mat-card-title *ngIf="customerdata.Customertype=='Company'">Company Customer Detail:</mat-card-title>
+        <mat-card-content>
+            <div fxLayout="column">
+                <div fxLayout="row" fxLayoutAlign="start center">
+                    <div class="input-div-1" *ngIf="customerdata.Customertype=='Individual'">Customer Name:</div>
+                    <div class="input-div-1" *ngIf="customerdata.Customertype=='Company'">Business Name:</div>
+                    <mat-form-field class="info">
+                        <input matInput [(ngModel)]="customerdata.CustomerName" readonly="true">
+                    </mat-form-field>
+                </div>
+                <div fxLayout="row" fxLayoutAlign="start center">
+                    <div class="input-div-1">Phone:</div>
+                    <mat-form-field class="info">
+                        <input matInput [(ngModel)]="customerdata.Phone" readonly="true">
+                    </mat-form-field>
+                </div>
+                <div fxLayout="row" fxLayoutAlign="start center">
+                    <div class="input-div-1">Customer Address:</div>
+                    <mat-form-field class="info">
+                        <input matInput [(ngModel)]="customerdata.CustomerAddress" readonly="true">
+                    </mat-form-field>
+                </div>
+                <div fxLayout="row" fxLayoutAlign="start center">
+                    <div class="input-div-1">Customer Email:</div>
+                    <mat-form-field class="info">
+                        <input matInput [(ngModel)]="customerdata.CustomerEmail" readonly="true">
+                    </mat-form-field>
+                </div>
+                <div *ngIf="customerdata.Customertype=='Company'">
+                    <div fxLayout="row" fxLayoutAlign="start center">
+                        <div class="input-div-1">PrimaryContact:</div>
+                        <mat-form-field>
+                            <input matInput [(ngModel)]="customerdata.PrimaryContact" readonly="true">
+                        </mat-form-field>
+                    </div>
+                </div>
+            </div>
+        </mat-card-content>
+    </mat-card>
+</div>

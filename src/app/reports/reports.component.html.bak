@@ -1,0 +1,269 @@
+<div class='page'>
+  <mat-tab-group>
+    <!-----------------------------------Sales By Color------------------------------------------->
+    <mat-tab label="Sales By Color">
+      <br />
+      <div fxLayout="row" fxLayoutAlign="start center">
+        <mat-form-field appearance="outline">
+          <mat-label>Date Range</mat-label>
+          <mat-select [(value)]="searchRequest.dateRange">
+            <mat-option *ngFor="let drange of dateRange" [value]="drange">{{drange}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <div style="width: 50px; margin: 45px; ">
+          <button mat-raised-button color="primary" class="search-button" (click)="SalebyColor()">Load</button>
+        </div>
+        <div style="width: 50px; margin: 15px; ">
+          <button mat-raised-button color="primary" class="search-button" (click)="SalebyColorReset()">Clear</button>
+        </div>
+      </div>
+      <div *ngIf="colortableisShown">
+        <div class="title-with-boarder2" style="margin-top:2.5%">
+          Results:
+        </div>
+        <br />
+        <div class="example-container mat-elevation-z8">
+          <table mat-table [dataSource]="reportSalesbyColor" class="mat-elevation-z8">
+
+            <!--- Note that these columns can be defined in any order.
+          The actual rendered columns are set as a property on the row definition" -->
+            <!-- Position Column -->
+            <ng-container matColumnDef="VehicleColor">
+              <th mat-header-cell *matHeaderCellDef> Vehicle Color </th>
+              <td mat-cell *matCellDef="let element"> {{element.VehicleColor}} </td>
+            </ng-container>
+
+            <!-- Name Column -->
+            <ng-container matColumnDef="NumberOfCarsSold">
+              <th mat-header-cell *matHeaderCellDef> Number Of Cars Sold </th>
+              <td mat-cell *matCellDef="let element"> {{element.NumberOfCarsSold}} </td>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          </table>
+        </div>
+      </div>
+    </mat-tab>
+
+
+
+    <!-----------------------------------Sales By Type------------------------------------------->
+    <mat-tab label="Sales By Type">
+      <br />
+      <div fxLayout="row" fxLayoutAlign="start center">
+        <mat-form-field appearance="outline">
+          <mat-label>Date Range</mat-label>
+          <mat-select [(value)]="searchRequest.dateRange">
+            <mat-option *ngFor="let drange of dateRange" [value]="drange">{{drange}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <div style="width: 50px; margin: 45px; ">
+          <button mat-raised-button disabled color="primary" class="search-button" (click)="BelowCostSales()">Load</button>
+        </div>
+        <div style="width: 50px; margin: 45px; ">
+          <button mat-raised-button disabled color="primary" class="search-button" (click)="BelowCostSalesReset()">Clear</button>
+        </div>
+      </div>
+
+
+    </mat-tab>
+
+
+    <!-----------------------------------Sales by Manufacturer------------------------------------------->
+    <mat-tab label="Sales By Manufacturer">
+      <br />
+      <div fxLayout="row" fxLayoutAlign="start center">
+        <mat-form-field appearance="outline">
+          <mat-label>Date Range</mat-label>
+          <mat-select [(value)]="searchRequest.dateRange">
+            <mat-option *ngFor="let drange of dateRange" [value]="drange">{{drange}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <div style="width: 50px; margin: 45px; ">
+          <button mat-raised-button disabled color="primary" class="search-button" (click)="BelowCostSales()">Load</button>
+        </div>
+        <div style="width: 50px; margin: 45px; ">
+          <button mat-raised-button disabled color="primary" class="search-button" (click)="BelowCostSalesReset()">Clear</button>
+        </div>
+      </div>
+    </mat-tab>
+
+    <!-----------------------------------Gross Customer Income------------------------------------------->
+    <mat-tab label="Gross Customer Income">
+      <div fxLayout="row" fxLayoutAlign="start center">
+        <div style="width: 50px; margin: 45px; ">
+          <button mat-raised-button disabled color="primary" class="search-button" (click)="AveTimeinInventory()">Load</button>
+        </div>
+        <div style="width: 50px; margin: 45px; ">
+          <button mat-raised-button disabled color="primary" class="search-button" (click)="AveTimeinInventoryReset()">Clear</button>
+        </div>
+      </div>
+
+    </mat-tab>
+
+    <!-----------------------------------Repairs by Manufacturer/Type/Model------------------------------------------->
+    <mat-tab label="Repairs by Manufacturer/Type/Model">
+      <div fxLayout="row" fxLayoutAlign="start center">
+        <div style="width: 50px; margin: 45px; ">
+          <button mat-raised-button disabled color="primary" class="search-button" (click)="AveTimeinInventory()">Load</button>
+        </div>
+        <div style="width: 50px; margin: 45px; ">
+          <button mat-raised-button disabled color="primary" class="search-button" (click)="AveTimeinInventoryReset()">Clear</button>
+        </div>
+      </div>
+    </mat-tab>
+
+    <!-----------------------------------Below Cost Sales------------------------------------------->
+    <mat-tab label="Below Cost Sales">
+
+      <div fxLayout="row" fxLayoutAlign="start center">
+        <div style="width: 50px; margin: 45px; ">
+          <button mat-raised-button color="primary" class="search-button" (click)="BelowCostSales()">Load</button>
+        </div>
+        <div style="width: 50px; margin: 45px; ">
+          <button mat-raised-button color="primary" class="search-button" (click)="BelowCostSalesReset()">Clear</button>
+        </div>
+      </div>
+      <div *ngIf="belowcosttableisShown">
+        <div class="title-with-boarder2" style="margin-top:2.5%">
+          Results:
+        </div>
+        <br />
+        <div class="example-container mat-elevation-z8">
+          <table mat-table [dataSource]="reportBelowCostSales" class="mat-elevation-z8">
+            <!-- SoldDate Column -->
+            <ng-container matColumnDef="SoldDate">
+              <th mat-header-cell *matHeaderCellDef> Sold Date </th>
+              <td mat-cell *matCellDef="let element1"> {{element1.SoldDate | date:'YYYY-MM-dd '}} </td>
+            </ng-container>
+
+            <!-- Name Column -->
+            <ng-container matColumnDef="InvoicePrice">
+              <th mat-header-cell *matHeaderCellDef> Invoice Price </th>
+              <td mat-cell *matCellDef="let element1"> {{element1.InvoicePrice}} </td>
+            </ng-container>
+
+            <!-- Name Column -->
+            <ng-container matColumnDef="SoldPrice">
+              <th mat-header-cell *matHeaderCellDef> Sold Price </th>
+              <td mat-cell *matCellDef="let element1"> {{element1.SoldPrice}} </td>
+            </ng-container>
+
+            <!-- Name Column -->
+            <ng-container matColumnDef="SoldInvoicePercentage">
+              <th mat-header-cell *matHeaderCellDef> Sold/Invoice Percentage </th>
+              <td mat-cell *matCellDef="let element1"> {{element1.SoldInvoicePercentage}} </td>
+            </ng-container>
+
+            <!-- Name Column -->
+            <ng-container matColumnDef="CustomerName">
+              <th mat-header-cell *matHeaderCellDef> Customer Name </th>
+              <td mat-cell *matCellDef="let element1"> {{element1.CustomerName}} </td>
+            </ng-container>
+
+            <!-- Name Column -->
+            <ng-container matColumnDef="SalespersonName">
+              <th mat-header-cell *matHeaderCellDef> Salesperson Name </th>
+              <td mat-cell *matCellDef="let element1"> {{element1.SalespersonName}} </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumnsbelowcostsales"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumnsbelowcostsales;let element1" [ngClass]="{'highlight': element1.SoldInvoicePercentage <= 95.0 }"></tr>
+          </table>
+        </div>
+      </div>
+    </mat-tab>
+
+    <!-----------------------------------Average Time in Inventory------------------------------------------->
+    <mat-tab label="Average Time in Inventory">
+      <div fxLayout="row" fxLayoutAlign="start center">
+        <div style="width: 50px; margin: 45px; ">
+          <button mat-raised-button color="primary" class="search-button" (click)="AveTimeinInventory()">Load</button>
+        </div>
+        <div style="width: 50px; margin: 45px; ">
+          <button mat-raised-button color="primary" class="search-button" (click)="AveTimeinInventoryReset()">Clear</button>
+        </div>
+      </div>
+      <div *ngIf="timeininventorytableisShown">
+        <div class="title-with-boarder2" style="margin-top:2.5%">
+          Results:
+        </div>
+        <br />
+        <div class="example-container mat-elevation-z8">
+          <table mat-table [dataSource]="reporttimeininventory" class="mat-elevation-z8">
+            <!-- SoldDate Column -->
+            <ng-container matColumnDef="VehicleType">
+              <th mat-header-cell *matHeaderCellDef> Vehicle Type </th>
+              <td mat-cell *matCellDef="let element2"> {{element2.VehicleType}} </td>
+            </ng-container>
+
+            <!-- Name Column -->
+            <ng-container matColumnDef="AverageDaysinInventory">
+              <th mat-header-cell *matHeaderCellDef> Average Days in Inventory </th>
+              <td mat-cell *matCellDef="let element2"> {{element2.AverageDaysinInventory}} </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumntimeininventory"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumntimeininventory;let element2"></tr>
+          </table>
+        </div>
+      </div>
+    </mat-tab>
+
+    <!-----------------------------------Parts Statistics------------------------------------------->
+    <mat-tab label="Parts Statistics">
+      <div fxLayout="row" fxLayoutAlign="start center">
+        <div style="width: 50px; margin: 45px; ">
+          <button mat-raised-button color="primary" class="search-button" (click)="PartsStats()">Load</button>
+        </div>
+        <div style="width: 50px; margin: 45px; ">
+          <button mat-raised-button color="primary" class="search-button" (click)="PartsStatsReset()">Clear</button>
+        </div>
+      </div>
+      <div *ngIf="partstatstableisShown">
+        <div class="title-with-boarder2" style="margin-top:2.5%">
+          Results:
+        </div>
+        <br />
+        <div class="example-container mat-elevation-z8">
+          <table mat-table [dataSource]="reporttimeininventory" class="mat-elevation-z8">
+            <!-- SoldDate Column -->
+            <ng-container matColumnDef="VendorName">
+              <th mat-header-cell *matHeaderCellDef> Vendor Name </th>
+              <td mat-cell *matCellDef="let element3"> {{element3.VendorName}} </td>
+            </ng-container>
+
+            <!-- Name Column -->
+            <ng-container matColumnDef="totalquantity">
+              <th mat-header-cell *matHeaderCellDef> Total Number Supplied </th>
+              <td mat-cell *matCellDef="let element3"> {{element3.totalquantity}} </td>
+            </ng-container>
+
+            <!-- Name Column -->
+            <ng-container matColumnDef="totalcost">
+              <th mat-header-cell *matHeaderCellDef> Total Cost </th>
+              <td mat-cell *matCellDef="let element3"> {{element3.totalcost}} </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumnpartsStats"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumnpartsStats;let element3"></tr>
+          </table>
+        </div>
+      </div>
+    </mat-tab>
+
+    <!-----------------------------------Monthly Sales------------------------------------------->
+    <mat-tab label="Monthly Sales">
+      <div fxLayout="row" fxLayoutAlign="start center">
+        <div style="width: 50px; margin: 45px; ">
+          <button mat-raised-button disabled color="primary" class="search-button" (click)="AveTimeinInventory()">Load</button>
+        </div>
+        <div style="width: 50px; margin: 45px; ">
+          <button mat-raised-button disabled color="primary" class="search-button" (click)="AveTimeinInventoryReset()">Clear</button>
+        </div>
+      </div>
+    </mat-tab>
+  </mat-tab-group>
+
+
+</div>

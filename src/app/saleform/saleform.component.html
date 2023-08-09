@@ -1,0 +1,34 @@
+<div class='page'>
+    <mat-card>
+        <mat-card-title>New Order:</mat-card-title>
+        <mat-card-subtitle></mat-card-subtitle>
+        <mat-card-content>
+            <div fxLayout="row" fxLayoutAlign="space-between center">
+                <mat-form-field style="width:50%">
+                    <mat-label>Customer</mat-label>
+                    <input matInput placeholder="DriverLicense OR Tax Indentification" [(ngModel)]="order.customer">
+                </mat-form-field>
+                <button mat-raised-button color="primary" class="" (click)="Search()">Search Customer</button>
+                <button mat-raised-button color="primary" class="" (click)="AddCustomer()">Add Customer</button>
+            </div>
+            <div *ngIf="customer">
+                <div fxLayout="row" fxLayoutAlign="start center">
+                    <div class="input-div-1">Customer Name:</div>
+                    <mat-form-field style="margin-left: 10%;">
+                        <input matInput [(ngModel)]="customer.CustomerName" readonly="true">
+                    </mat-form-field>
+                </div>
+                <h2>Order Information:</h2>
+                <div fxLayout="row" fxLayoutAlign="start center">
+                    <div class="input-div-1">Sold Price:</div>
+                    <mat-form-field style="margin-left: 10%;">
+                        <input matInput [(ngModel)]="order.soldPrice" type="number">
+                    </mat-form-field>
+                </div>
+                <mat-card-actions>
+                    <button mat-raised-button color="primary" (click)="AddSale()">Add Sale</button>
+                </mat-card-actions>
+            </div>
+        </mat-card-content>
+    </mat-card>
+</div>

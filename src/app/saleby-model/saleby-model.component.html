@@ -1,0 +1,88 @@
+
+<div class='page'>
+<div>
+  <div fxLayout="row" fxLayoutAlign="space-between center">
+        <h1></h1>
+    </div>
+</div>
+
+
+
+<div>
+    <div fxLayout="row" fxLayoutAlign="space-between center">
+
+      <mat-form-field appearance="fill">
+        <mat-label>Date Range</mat-label>
+        <mat-select [(value)]="dtchoice">
+          
+          <mat-option value="MONTH">Past 30 days</mat-option>
+          <mat-option value="YEAR">Past 1 year</mat-option>
+          <mat-option value="ALL">Over all time</mat-option>  
+        </mat-select>
+      </mat-form-field>
+      
+        <button mat-raised-button color="primary" class="search-button" (click)="ReportbyDays()">Generate Reports</button>
+    </div>
+</div>
+
+
+
+<div *ngIf="tableisShown && (view =='Type')">
+  <div class = "title-with-boarder2" style = "margin-top:2.5%">Results:</div>
+  <table mat-table [dataSource]="salesdata" class="mat-elevation-z8">
+
+      <!--- Note that these columns can be defined in any order.
+            The actual rendered columns are set as a property on the row definition" -->
+    
+      <!-- Position Column -->
+      
+      <ng-container matColumnDef="VehicleType">
+        <th mat-header-cell *matHeaderCellDef> Vehicle Type </th>
+        <td mat-cell *matCellDef="let element"> {{element.VehicleType}} </td>
+      </ng-container>
+      
+
+
+      <!-- Name Column -->
+      <ng-container matColumnDef="NumberOfCarsSold">
+        <th mat-header-cell *matHeaderCellDef> Number of Sales</th>
+        <td mat-cell *matCellDef="let element"> {{element.NumberOfCarsSold}} </td>
+      </ng-container>
+    
+      <tr mat-header-row *matHeaderRowDef="displayedColumns.Type"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns.Type;"></tr>
+    </table>
+    
+
+</div>
+
+
+<div *ngIf=" tableisShown && (view =='Manufacturer')">
+  <div class = "title-with-boarder2" style = "margin-top:2.5%">Results of {{Days}} Days:</div>
+  <table mat-table [dataSource]="salesdata" class="mat-elevation-z8">
+
+      <!--- Note that these columns can be defined in any order.
+            The actual rendered columns are set as a property on the row definition" -->
+    
+      <!-- Position Column -->
+      
+      <ng-container matColumnDef="VehicleManufacturer">
+        <th mat-header-cell *matHeaderCellDef> Vehicle Manufacturer </th>
+        <td mat-cell *matCellDef="let element"> {{element.VehicleManufacturer}} </td>
+      </ng-container>
+      
+
+
+      <!-- Name Column -->
+      <ng-container matColumnDef="NumberOfCarsSold">
+        <th mat-header-cell *matHeaderCellDef> Number of Sales</th>
+        <td mat-cell *matCellDef="let element"> {{element.NumberOfCarsSold}} </td>
+      </ng-container>
+    
+      <tr mat-header-row *matHeaderRowDef="displayedColumns.Manufacturer"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns.Manufacturer;"></tr>
+    </table>
+    
+
+</div>
+

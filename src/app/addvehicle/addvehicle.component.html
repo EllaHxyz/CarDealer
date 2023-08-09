@@ -1,0 +1,97 @@
+<div class='page' *ngIf="vehicleData">
+    <mat-card>
+        <mat-card-title>Input Vehicle Detail:</mat-card-title>
+        <mat-card-content>
+            <div fxLayout="column">
+                <div fxLayout="row" fxLayoutAlign="start">
+                    <mat-form-field appearance="outline">
+                        <mat-label>VIN:</mat-label>
+                        <input matInput class="input-div" [(ngModel)]="vehicleData.vin">
+                    </mat-form-field>
+                    <mat-form-field appearance="outline">
+                        <mat-label>Model Name:</mat-label>
+                        <input matInput [(ngModel)]="vehicleData.modelName">
+                    </mat-form-field>
+                    <mat-form-field appearance="outline">
+                        <mat-label>Vehicle Type</mat-label>
+                        <mat-select [(value)]="vehicleData.vehicleType">
+                            <mat-option *ngFor="let type of vehicleType" [value]="type">{{type}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <mat-form-field appearance="outline">
+                        <mat-label>Manufacture</mat-label>
+                        <mat-select [(value)]="vehicleData.manufacturerName">
+                            <mat-option *ngFor="let type of ManufactureList" [value]="type.ManufacturerName">{{type.ManufacturerName}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div *ngIf="vehicleData.vehicleType=='Car'">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Number of doors:</mat-label>
+                        <input matInput [(ngModel)]="vehicleData.doorCount" type="Number">
+                    </mat-form-field>
+                </div>
+                <div *ngIf="vehicleData.vehicleType=='Convertible'">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Roof Type:</mat-label>
+                        <input matInput [(ngModel)]="vehicleData.roofType">
+                    </mat-form-field>
+                    <mat-form-field appearance="outline">
+                        <mat-label>Back Seat Count:</mat-label>
+                        <input matInput [(ngModel)]="vehicleData.backSeatCount" type="Number">
+                    </mat-form-field>
+                </div>
+                <div *ngIf="vehicleData.vehicleType=='Truck'">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Cargo capacity (in tons):</mat-label>
+                        <input matInput [(ngModel)]="vehicleData.cargoCapacity" type="Number">
+                    </mat-form-field>
+                    <mat-form-field appearance="outline">
+                        <mat-label>Cargo cover type (optional):</mat-label>
+                        <input matInput [(ngModel)]="vehicleData.cargoCoverType">
+                    </mat-form-field>
+                    <mat-form-field appearance="outline">
+                        <mat-label>Number of rear axles:</mat-label>
+                        <input matInput [(ngModel)]="vehicleData.rearAxles" type="number">
+                    </mat-form-field>
+                </div>
+                <div *ngIf="vehicleData.vehicleType=='Van'">
+                    <mat-checkbox class="example-margin" [(ngModel)]="vehicleData.hasBackdoor">Has Driver’s Side Back Door</mat-checkbox>
+                </div>
+                <div *ngIf="vehicleData.vehicleType=='SUV'">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Drivetraintype:</mat-label>
+                        <input matInput [(ngModel)]="vehicleData.drivetrainType">
+                    </mat-form-field>
+                    <mat-form-field appearance="outline">
+                        <mat-label>Number of cupholders:</mat-label>
+                        <input matInput [(ngModel)]="vehicleData.cupholderCount" type="Number">
+                    </mat-form-field>
+                </div>
+                <div>
+                    <mat-form-field appearance="outline">
+                        <mat-label>Model Year:</mat-label>
+                        <input matInput [(ngModel)]="vehicleData.modelYear" type="Number">
+                    </mat-form-field>
+                    <mat-form-field appearance="outline">
+                        <mat-label>Colors:</mat-label>
+                        <mat-select [(ngModel)]="vehicleData.color" multiple>
+                            <mat-option *ngFor="let topping of ColorList" [value]="topping.Color">{{topping.Color}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <mat-form-field appearance="outline">
+                        <mat-label>invoicePrice:</mat-label>
+                        <input matInput [(ngModel)]="vehicleData.invoicePrice" type="number">
+                    </mat-form-field>
+                </div>
+                <mat-form-field>
+                    <mat-label>Description:</mat-label>
+                    <textarea class="example-full-width" matInput placeholder="Ex. This vehicle..." [(ngModel)]="vehicleData.description"></textarea>
+                </mat-form-field>
+            </div>
+            <mat-card-actions>
+                <button mat-raised-button color="primary" (click)="addVehicle()">Add Vehicle</button>
+            </mat-card-actions>
+        </mat-card-content>
+    </mat-card>
+</div>

@@ -1,0 +1,67 @@
+
+<div class='page'>
+    <div>
+      <div fxLayout="row" fxLayoutAlign="space-between center">
+            <h1></h1>
+        </div>
+    </div>
+
+<div>
+    <button mat-raised-button color="primary" class="search-button" (click)="Getmonthlysale()">Generate Reports</button>
+    </div>
+    <br>
+    <br>
+<div *ngIf="tableisShown_person">
+    <div class="example-container mat-elevation-z8">
+    <table mat-table [dataSource]="salesdata" multiTemplateDataRows class="mat-elevation-z8">
+
+        <ng-container matColumnDef="{{column}}" *ngFor="let column of columnsToDisplay">
+            <th mat-header-cell *matHeaderCellDef> {{column}} </th>
+            <td mat-cell *matCellDef="let element"> {{element[column]}} </td>
+        </ng-container>
+
+
+
+        <!-- Expanded Content Column - The detail row is made up of this one column that spans across all columns -->
+
+        <ng-container matColumnDef="expandedDetail">
+            <td mat-cell *matCellDef="let element" [attr.colspan]="columnsToDisplay.length">
+                <div class="example-element-detail" [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
+                    <table mat-table [dataSource]="element.SalesPerson" class="mat-elevation-z8">
+                        <ng-container matColumnDef="S-Firstname">
+                            <th mat-header-cell *matHeaderCellDef>FirstName</th>
+                            <td mat-cell *matCellDef="let element"> {{element.FirstName}} </td>
+                        </ng-container>
+                        <ng-container matColumnDef="S-Lastname">
+                            <th mat-header-cell *matHeaderCellDef>LastName</th>
+                            <td mat-cell *matCellDef="let element"> {{element.LastName}} </td>
+                        </ng-container>
+                        <ng-container matColumnDef="S-Total-number">
+                            <th mat-header-cell *matHeaderCellDef>Total Number of Vehicles Sold</th>
+                            <td mat-cell *matCellDef="let element"> {{element.TotalNumberofVehiclesSold}} </td>
+                        </ng-container>
+                        <ng-container matColumnDef="S-Total-sale">
+                            <th mat-header-cell *matHeaderCellDef>Total Sales Income</th>
+                            <td mat-cell *matCellDef="let element"> {{element.TotalSalesIncome}} </td>
+                        </ng-container>
+                        <ng-container matColumnDef="S-salesrank">
+                            <th mat-header-cell *matHeaderCellDef>Sales Rank</th>
+                            <td mat-cell *matCellDef="let element"> {{element.sales_rank}} </td>
+                        </ng-container>
+                        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                        <tr mat-row *matRowDef="let row; columns: displayedColumns;" [ngClass]="{'first':row.sales_rank===1}"></tr>
+                    </table>
+
+                </div>
+            </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+        <tr mat-row *matRowDef="let element; columns: columnsToDisplay;" class="example-element-row" [class.example-expanded-row]="expandedElement === element" (click)="expandedElement = expandedElement === element ? null : element" [ngClass]="{ 'high': element.SoldInvoicePercentage >=125 ,'low':element.SoldInvoicePercentage<=110}">
+        </tr>
+
+        <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row" [ngClass]="{ 'high': row.SoldInvoicePercentage >=125,'low':row.SoldInvoicePercentage<=110}"></tr>
+    </table>
+    </div>
+</div>
+</div>

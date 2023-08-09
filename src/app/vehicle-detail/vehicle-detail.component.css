@@ -1,0 +1,17 @@
+.page {
+    /* text-align: center; */
+    width: 1000px;
+    margin: 2% auto;
+}
+
+.example-container {
+    width: 100%;
+}
+
+.input-div-1 {
+    margin-left: 10%;
+}
+
+.input-div-2 {
+    margin-left: 20%;
+}

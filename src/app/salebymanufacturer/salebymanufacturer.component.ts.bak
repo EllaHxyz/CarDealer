@@ -1,0 +1,15 @@
+import { Component, OnInit } from '@angular/core';
+
+@Component({
+  selector: 'app-salebymanufacturer',
+  templateUrl: './salebymanufacturer.component.html',
+  styleUrls: ['./salebymanufacturer.component.css']
+})
+export class SalebymanufacturerComponent implements OnInit {
+
+  constructor() { }
+
+  ngOnInit(): void {
+  }
+
+}
